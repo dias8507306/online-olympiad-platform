@@ -1,0 +1,42 @@
+/* Минималды бет: есеп + аты + сынып + жауап. Түстер/қаріп base.css-тен (diagnostika дизайны). */
+body{min-height:100vh}
+.top{display:flex;align-items:center;gap:12px;max-width:640px;margin:0 auto;padding:16px 16px 0}
+.top .logo{flex:1}
+.logo svg{width:40px;height:40px}
+.btn svg{width:18px;height:18px}
+.one{max-width:640px;margin:0 auto;padding:16px 16px 48px}
+
+.prob{position:relative;overflow:hidden;border-radius:28px;padding:26px;color:#fff;
+  background-image:
+    radial-gradient(70% 60% at 10% 6%,rgba(110,79,216,.72),transparent 60%),
+    radial-gradient(55% 55% at 94% 26%,rgba(40,87,252,.46),transparent 62%),
+    linear-gradient(165deg,#2E0F4C 0%,#1A0B3A 50%,#0E1236 100%);
+  box-shadow:0 30px 60px -34px rgba(10,4,40,.7)}
+.prob-top{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:999px;font-size:14px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#EDE7FF}
+.chip.gold{background:var(--gold);border-color:var(--gold);color:#1B1300}
+.prob-text{margin-top:16px;font-size:clamp(19px,4.6vw,23px);line-height:1.45;font-weight:600;letter-spacing:-.01em}
+.prob-text sup{font-size:.62em;line-height:0;vertical-align:.7em}
+.eqs{margin-top:16px;display:grid;gap:8px}
+.eq{display:grid;grid-template-columns:1fr 32px 1fr 32px 1.2fr;align-items:center;padding:6px 12px;border-radius:16px;background:rgba(255,255,255,.08);font-weight:700;font-size:clamp(26px,7vw,36px);text-align:center}
+.eq .p{color:#4ADE80}.eq .e{color:var(--gold)}.eq .r{color:#C4B5FD}
+.eq.q{background:rgba(255,255,255,.14);border:1.5px solid rgba(244,205,75,.6)}
+.eq .qb{justify-self:center;width:64px;border-radius:12px;background:var(--gold);color:#1B1300;line-height:1.3}
+
+.card{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 18px 50px -34px rgba(46,15,76,.45)}
+.card .field:first-child{margin-top:0}
+.grades{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.grades button{height:54px;border-radius:16px;border:1.5px solid var(--line);background:#FBFAFE;font-size:18px;font-weight:700;color:var(--violet-deep);transition:border-color .2s,background-color .2s,color .2s}
+.grades button[aria-checked="true"]{background:var(--violet);border-color:var(--violet);color:#fff}
+#ans{font-size:22px;font-weight:700}
+.card .btn{width:100%;margin-top:20px}
+
+.note{margin-top:14px;display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:24px;font-size:15px;line-height:1.5;background:#fff;border:1px solid var(--line)}
+.note b{display:block;font-size:19px;margin-bottom:2px}
+.note i{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:13px;font-style:normal;font-weight:700;font-size:20px;color:#fff;background:var(--green)}
+.note.ok{background:#E7F6EE;border-color:#BFE6D0;color:#065F38}
+.note.off i{background:#A3A9B5}
+.note.off{color:var(--muted)}
+.link{margin-top:14px;display:block;width:100%;text-align:center;font-size:14px;color:var(--violet-600);text-decoration:underline}
+.loading{padding:60px 0;text-align:center;color:var(--muted)}
+.btn[disabled]{opacity:.6;pointer-events:none}

@@ -1,0 +1,14 @@
+{
+  "framework": null,
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "regions": ["fra1"],
+  "functions": {
+    "api/*.js": { "maxDuration": 15 }
+  },
+  "headers": [
+    { "source": "/admin", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] },
+    { "source": "/(app.css|app.js|base.css)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=300, stale-while-revalidate=86400" }] }
+  ]
+}

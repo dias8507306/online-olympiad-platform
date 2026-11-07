@@ -1,0 +1,18 @@
+{
+  "name": "online-olympiad-platform",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node dev-server.mjs 34",
+    "dev:56": "node dev-server.mjs 56",
+    "demo-data": "node scripts/generate-demo-data.mjs",
+    "test": "node --test tests/unit.test.mjs",
+    "test:scenarios": "node tests/scenarios.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0"
+  },
+  "optionalDependencies": {
+    "@electric-sql/pglite": "^0.5.8"
+  }
+}

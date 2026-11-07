@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Дашборд · EduApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/base.css">
+<style>
+.logo svg{width:40px;height:40px}
+.top{display:flex;align-items:center;gap:10px;max-width:1180px;margin:0 auto;padding:16px}
+.top .logo{flex:1}
+.adm{max-width:1180px;margin:0 auto;padding:8px 16px 48px}
+.login{max-width:420px;margin:40px auto}
+.login .btn{width:100%;margin-top:20px}
+.tabs{display:inline-flex;padding:4px;border-radius:999px;background:var(--violet-soft)}
+.tabs button{height:40px;padding:0 18px;border-radius:999px;font-weight:600;color:var(--violet-600)}
+.tabs button[aria-pressed="true"]{background:var(--violet);color:#fff}
+.tb{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:8px}
+.stats{margin-top:18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{padding:18px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.stat small{display:block;color:var(--muted);font-size:13px;font-weight:500}
+.stat b{display:block;margin-top:2px;font-size:30px;letter-spacing:-.03em;line-height:1.1}
+.tbl-wrap{margin-top:14px;overflow:auto;border-radius:20px;border:1px solid var(--line);background:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:10px 14px;text-align:left;white-space:nowrap;border-bottom:1px solid #F0EDF5}
+th{background:#FBFAFE;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+tr.top10 td{background:#FFFBEA}
+td.n{font-weight:700}
+.rk{display:inline-grid;place-items:center;min-width:28px;height:28px;border-radius:9px;background:#EEF0F6;font-weight:700}
+tr.top10 .rk{background:var(--gold)}
+.dots{display:flex;gap:4px}
+.dots i{width:18px;height:18px;border-radius:6px;background:#EEF0F6;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#fff}
+.dots i.c{background:var(--green)}.dots i.w{background:#E5484D}.dots i.o{background:#fff;border:1.5px dashed #C9BDF0}
+.acts{display:flex;gap:12px}
+.acts button{font-size:13px;font-weight:600;color:var(--violet-600)}
+.acts button.del{color:#B42318}
+.acts button:hover{text-decoration:underline}
+.warn{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:8px;background:#FFF1EB;color:var(--orange);font-size:12px;font-weight:600;cursor:help}
+.muted{color:var(--muted)}
+.legend2{margin-top:10px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend2 span{display:inline-flex;align-items:center;gap:6px}
+h3.sec{margin:32px 0 0;font-size:19px}
+.chip{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;background:var(--violet-soft);color:var(--violet-600)}
+.chip.gold{background:#FFF6D6;color:#8A5A00}.chip.grey{background:#EEF0F6;color:var(--muted)}
+
+/* Ата-аналарға көрсететін рейтинг карточкасы */
+.show-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.show-tools label{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.board{margin-top:16px;width:100%;max-width:640px;border-radius:32px;overflow:hidden;background:#F4F6FF;border:1px solid var(--line)}
+.b-head{padding:28px 26px 24px;color:#fff;
+  background-image:radial-gradient(70% 60% at 10% 6%,rgba(110,79,216,.72),transparent 60%),radial-gradient(55% 55% at 94% 26%,rgba(40,87,252,.46),transparent 62%),linear-gradient(165deg,#2E0F4C 0%,#1A0B3A 50%,#0E1236 100%)}
+.b-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.b-brand svg{width:34px;height:34px}
+.b-title{margin-top:18px;font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.b-title span{color:var(--gold)}
+.b-sub{margin-top:6px;color:rgba(255,255,255,.75);font-size:15px}
+.b-ans{margin:16px 20px 0;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:20px;background:#fff;border:1px solid var(--line);font-size:15px}
+.b-ans b{margin-left:auto;font-size:26px;color:var(--violet);letter-spacing:-.02em}
+.b-list{list-style:none;margin:0;padding:14px 20px 6px;display:grid;gap:8px}
+.b-list li{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.b-list .pl{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:12px;background:#EEF0F6;font-weight:700;font-size:16px}
+.b-list li.m1 .pl{background:#F4CD4B}.b-list li.m2 .pl{background:#DDE1EA}.b-list li.m3 .pl{background:#F2C29B}
+.b-list li.m1{border-color:#F4CD4B;box-shadow:0 0 0 3px rgba(244,205,75,.25)}
+.b-list .nm{flex:1;min-width:0;font-weight:600;font-size:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.b-list .nm small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.b-list .sc{font-weight:700;font-size:20px;color:var(--violet-deep)}
+.b-list .sc small{font-weight:500;font-size:13px;color:var(--muted)}
+.b-foot{padding:14px 20px 22px;text-align:center;font-size:14px;font-weight:600;color:var(--violet-600)}
+.b-empty{padding:24px;text-align:center;color:var(--muted)}
+.b-dist{margin:12px 20px 0;padding:16px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.b-dist-t{font-weight:700;font-size:15px}
+.b-dist-t small{display:block;font-weight:500;font-size:13px;color:var(--muted)}
+.dr{display:grid;grid-template-columns:76px 1fr 48px;align-items:center;gap:10px;margin-top:10px;font-size:15px}
+.dr .v{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dr .bar2{height:14px;border-radius:999px;background:#EEF0F6;overflow:hidden}
+.dr .bar2 i{display:block;height:100%;border-radius:inherit;background:#B9A8F0}
+.dr.ok .v{color:var(--green)}.dr.ok .bar2 i{background:var(--green)}
+.dr .pc{text-align:right;font-weight:700;color:var(--violet-deep)}
+.dchips{display:flex;flex-wrap:wrap;gap:4px;white-space:normal;min-width:180px}
+.dchips span{display:inline-block;padding:2px 8px;border-radius:8px;background:#EEF0F6;font-size:12px;font-weight:600}
+.dchips span.ok{background:#E7F6EE;color:var(--green)}
+@media (max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="zg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64748b"/><stop offset="1" stop-color="#334155"/></linearGradient></defs><symbol id="logo" viewBox="0 0 192 192"><rect x="4" y="4" width="184" height="184" rx="44" fill="url(#zg)"/><text x="96" y="126" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="86" font-weight="700" fill="#fff">EA</text></symbol></svg>
+
+<header class="top">
+  <span class="logo"><svg aria-hidden="true"><use href="#logo"/></svg><span>eduapp<small id="hsub">Дашборд</small></span></span>
+  <button class="btn btn-outline btn-sm" id="refresh" hidden>Жаңарту</button>
+  <button class="btn btn-outline btn-sm" id="logout" hidden>Шығу</button>
+</header>
+
+<main class="adm">
+  <form class="card login" id="login" novalidate>
+    <h2>Дашбордқа кіру</h2>
+    <p class="card-sub">Бұл бет тек әкімшіге арналған.</p>
+    <div class="field"><label for="pw">Құпиясөз</label><input id="pw" type="password" autocomplete="current-password"></div>
+    <button class="btn btn-gold" type="submit">Кіру</button>
+    <p class="err" id="err" role="alert"></p>
+  </form>
+
+  <div id="dash" hidden>
+    <div class="tb">
+      <div class="tabs" role="group">
+        <button type="button" data-v="show" aria-pressed="true">Ата-аналарға көрсету</button>
+        <button type="button" data-v="table" aria-pressed="false">Толық кесте</button>
+      </div>
+      <span class="muted" id="upd"></span>
+    </div>
+
+    <!-- 1. Ата-аналарға көрсету -->
+    <section id="v-show">
+      <div class="show-tools">
+        <label><input type="checkbox" id="onlyTop" checked> Тек үздік 10</label>
+        <label><input type="checkbox" id="showAns" checked> Кешегі жауапты көрсету</label>
+        <label><input type="checkbox" id="showDist" checked> Жауаптар статистикасы (%)</label>
+        <select id="distDay" style="height:36px;border-radius:10px;border:1px solid var(--line);padding:0 8px;font:inherit;font-size:14px"></select>
+        <button class="btn btn-gold btn-sm" id="png">Суретті жүктеу (PNG)</button>
+        <span class="muted" style="font-size:13px">не скриншот жасап, WhatsApp-қа жіберіңіз</span>
+      </div>
+      <div class="board" id="board"></div>
+    </section>
+
+    <!-- 2. Толық кесте -->
+    <section id="v-table" hidden>
+      <div class="stats" id="stats"></div>
+      <div class="tb" style="margin-top:18px">
+        <h3 class="sec" style="margin:0">Рейтинг</h3>
+        <button class="btn btn-outline btn-sm" id="csv">Excel-ге жүктеу (CSV)</button>
+      </div>
+      <div class="tbl-wrap"><table id="lb"></table></div>
+      <div class="legend2">
+        <span><span class="dots"><i class="c">✓</i></span> дұрыс</span>
+        <span><span class="dots"><i class="w">✗</i></span> қате</span>
+        <span><span class="dots"><i></i></span> жауап жоқ</span>
+        <span><span class="dots"><i class="o"></i></span> бүгін / алда</span>
+        <span>Ұпай тең болса — соңғы дұрыс жауабын ертерек жіберген жоғары.</span>
+      </div>
+      <h3 class="sec">Есептер</h3>
+      <div class="tbl-wrap"><table id="pt"></table></div>
+    </section>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  var KEY = 'zo-admin', D = null, LB = [], VIEW = 'show';
+  // PNG-ге түсуі үшін логотип толық (use-сыз) SVG ретінде
+  var LOGO = '<svg viewBox="0 0 192 192" aria-hidden="true"><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64748b"/><stop offset="1" stop-color="#334155"/></linearGradient></defs><rect x="4" y="4" width="184" height="184" rx="44" fill="url(#bg1)"/><text x="96" y="126" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="86" font-weight="700" fill="#fff">EA</text></svg>';
+  var KK_M = ['қаңтар','ақпан','наурыз','сәуір','мамыр','маусым','шілде','тамыз','қыркүйек','қазан','қараша','желтоқсан'];
+
+  function pw() { try { return sessionStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
+  function setPw(v) { try { v ? sessionStorage.setItem(KEY, v) : sessionStorage.removeItem(KEY); } catch (e) {} }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function parseAns(raw) {
+    var x = String(raw || '').trim();
+    x = x.replace(/(\d)[\s  ]+(?=\d{3}\b)/g, '$1').replace(/^(-?\d{1,3})[,.](\d{3})(?!\d)(?![,.]\d)/, '$1$2').replace(/(\d),(\d)/g, '$1.$2');
+    var m = x.match(/-?\d+(?:\.\d+)?/g);
+    return m && m.length === 1 ? String(Number(m[0])) : x;
+  }
+  // Бір есеп бойынша: қандай жауапты неше % адам берді (бірдей сандар біріктіріледі)
+  function dist(pid, top) {
+    var list = D.answers.filter(function (a) { return a.problem_id === pid; }), m = {};
+    list.forEach(function (a) { var k = parseAns(a.answer); (m[k] = m[k] || { v: k, n: 0, ok: false }).n++; if (a.correct) m[k].ok = true; });
+    var arr = Object.keys(m).map(function (k) { return m[k]; }).sort(function (a, b) { return b.n - a.n; });
+    if (top && arr.length > top) {
+      var rest = arr.slice(top - 1).reduce(function (s, x) { return s + x.n; }, 0);
+      arr = arr.slice(0, top - 1).concat([{ v: 'басқа', n: rest, ok: false, other: true }]);
+    }
+    arr.forEach(function (x) { x.pct = list.length ? Math.round(x.n * 100 / list.length) : 0; });
+    return { total: list.length, rows: arr };
+  }
+  function kkDate(iso) { var d = new Date(iso + 'T00:00:00Z'); return d.getUTCDate() + ' ' + KK_M[d.getUTCMonth()]; }
+  function fmtTime(iso) {
+    if (!iso) return '—';
+    var d = new Date(Date.parse(iso) + 5 * 3600e3), p = function (n) { return (n < 10 ? '0' : '') + n; };
+    return p(d.getUTCDate()) + '.' + p(d.getUTCMonth() + 1) + ' ' + p(d.getUTCHours()) + ':' + p(d.getUTCMinutes());
+  }
+  function grpLabel() { return D.group.grades.join('–'); }
+
+  function call(body) {
+    body.password = pw();
+    return fetch('/api/admin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); });
+  }
+  function load() {
+    return call({}).then(function (r) {
+      if (r.status === 401) { setPw(''); return showLogin('Құпиясөз қате.'); }
+      if (r.status !== 200) return showLogin('Сервер қатесі. Кейінірек қайталаңыз.');
+      D = r.body;
+      $('#login').hidden = true; $('#dash').hidden = false; $('#refresh').hidden = false; $('#logout').hidden = false;
+      render();
+    }).catch(function () { showLogin('Байланыс қатесі.'); });
+  }
+  function showLogin(msg) {
+    $('#dash').hidden = true; $('#login').hidden = false; $('#refresh').hidden = true; $('#logout').hidden = true;
+    if (msg) { var e = $('#err'); e.textContent = msg; e.classList.add('show'); }
+  }
+
+  /* рейтинг: дұрыс жауап саны ↓, тең болса — соңғы дұрыс жауап ертерек */
+  function build() {
+    var by = {};
+    D.answers.forEach(function (a) { (by[a.student_id] = by[a.student_id] || {})[a.problem_id] = a; });
+    var rows = D.students.map(function (s) {
+      var ans = by[s.id] || {}, correct = 0, answered = 0, lastCorrect = null, last = null;
+      D.problems.forEach(function (p) {
+        var a = ans[p.id]; if (!a) return;
+        answered++;
+        if (!last || a.created_at > last) last = a.created_at;
+        if (a.correct) { correct++; if (!lastCorrect || a.created_at > lastCorrect) lastCorrect = a.created_at; }
+      });
+      return { s: s, ans: ans, correct: correct, answered: answered, lastCorrect: lastCorrect, last: last };
+    });
+    rows.sort(function (a, b) {
+      if (b.correct !== a.correct) return b.correct - a.correct;
+      if (a.lastCorrect !== b.lastCorrect) return (a.lastCorrect || '9') < (b.lastCorrect || '9') ? -1 : 1;
+      if (b.answered !== a.answered) return b.answered - a.answered;
+      return a.s.id - b.s.id;
+    });
+    // Тең ұпай мен тең уақыт болмайды, сондықтан орын = реттік нөмір.
+    return rows;
+  }
+
+  function render() {
+    LB = build();
+    $('#hsub').textContent = grpLabel() + ' сынып · дашборд';
+    $('#upd').textContent = 'Жаңартылды: ' + new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    $$('.tabs button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === VIEW)); });
+    $('#v-show').hidden = VIEW !== 'show';
+    $('#v-table').hidden = VIEW !== 'table';
+    fillDistDay();
+    renderBoard();
+    renderTable();
+  }
+
+  function fillDistDay() {
+    var sel = $('#distDay'), cur = sel.value;
+    var avail = D.problems.filter(function (p) { return p.date <= D.today; });
+    var past = avail.filter(function (p) { return p.date < D.today; });
+    var def = (past[past.length - 1] || avail[avail.length - 1] || {}).id;
+    sel.innerHTML = avail.map(function (p) { return '<option value="' + p.id + '">' + p.day + '-күн (' + kkDate(p.date) + ')' + (p.date === D.today ? ' · бүгін' : '') + '</option>'; }).join('');
+    sel.value = avail.some(function (p) { return p.id === cur; }) ? cur : def;
+  }
+  function distBlock() {
+    if (!$('#showDist').checked) return '';
+    var p = D.problems.filter(function (x) { return x.id === $('#distDay').value; })[0];
+    if (!p) return '';
+    var d = dist(p.id, 5);
+    if (!d.total) return '';
+    var reveal = p.date < D.today; // бүгінгі есептің дұрыс жауабын белгілемейміз
+    return '<div class="b-dist"><div class="b-dist-t">' + p.day + '-күн: қандай жауапты неше % берді<small>Ответы на задачу дня ' + p.day + ' · барлығы ' + d.total + ' жауап</small></div>' +
+      d.rows.map(function (x) {
+        var ok = reveal && x.ok;
+        return '<div class="dr' + (ok ? ' ok' : '') + '"><span class="v">' + esc(x.v) + (ok ? ' ✓' : '') + '</span><span class="bar2"><i style="width:' + x.pct + '%"></i></span><span class="pc">' + x.pct + '%</span></div>';
+      }).join('') + '</div>';
+  }
+
+  function renderBoard() {
+    var today = D.today;
+    var past = D.problems.filter(function (p) { return p.date < today; });
+    var lastP = past[past.length - 1];
+    var doneDays = past.length;
+    var rows = LB.filter(function (r) { return r.answered > 0; });
+    if ($('#onlyTop').checked) rows = rows.slice(0, 10);
+    var list = rows.map(function (r, i) {
+      return '<li class="' + (i < 3 && r.correct > 0 ? 'm' + (i + 1) : '') + '"><span class="pl">' + (i + 1) + '</span>' +
+        '<span class="nm">' + esc(r.s.name) + '<small>' + r.s.grade + '-сынып</small></span>' +
+        '<span class="sc">' + r.correct + ' <small>/ ' + (doneDays || r.answered) + ' дұрыс</small></span></li>';
+    }).join('');
+    var sub = doneDays ? doneDays + ' күннің қорытындысы · ' + kkDate(lastP.date) : 'Бүгінгі жағдай · ' + kkDate(today);
+    $('#board').innerHTML =
+      '<div class="b-head"><div class="b-brand">' + LOGO + 'eduapp</div>' +
+      '<div class="b-title">' + grpLabel() + ' сынып · <span>Көшбасшылар</span></div>' +
+      '<div class="b-sub">' + esc(sub) + ' · Лидеры</div></div>' +
+      ($('#showAns').checked && lastP ? '<div class="b-ans">' + lastP.day + '-күннің дұрыс жауабы · Ответ дня ' + lastP.day + '<b>' + lastP.answer + '</b></div>' : '') +
+      distBlock() +
+      (list ? '<ol class="b-list">' + list + '</ol>' : '<div class="b-empty">Әзірге жауап жоқ</div>') +
+      '<div class="b-foot">Үздік 10 оқушыға — 30% жеңілдік · Топ-10 — скидка 30%</div>';
+  }
+
+  function nk(s) { return String(s.key || ''); }
+  function dupName(s) {
+    var a = nk(s).split(' ');
+    return D.students.some(function (o) {
+      if (o.id === s.id) return false;
+      var b = nk(o).split(' '), small = a.length <= b.length ? a : b, big = small === a ? b : a;
+      return small.every(function (w) { return big.indexOf(w) !== -1; });
+    });
+  }
+
+  function renderTable() {
+    var today = D.today;
+    var todayN = D.answers.filter(function (a) { var p = D.problems.filter(function (x) { return x.id === a.problem_id; })[0]; return p && p.date === today; }).length;
+    var correctAll = D.answers.filter(function (a) { return a.correct; }).length;
+    $('#stats').innerHTML = [['Қатысушылар', D.students.length], ['Бүгінгі жауаптар', todayN], ['Барлық жауаптар', D.answers.length], ['Дұрыс жауаптар', D.answers.length ? Math.round(correctAll * 100 / D.answers.length) + '%' : '—']]
+      .map(function (x) { return '<div class="stat"><small>' + x[0] + '</small><b>' + x[1] + '</b></div>'; }).join('');
+
+    var head = '<tr><th>#</th><th>Аты-жөні</th><th>Сынып</th><th>Дұрыс</th><th>Жауап берді</th><th>Күндер</th><th>Соңғы жауап</th><th></th></tr>';
+    var body = LB.map(function (r, i) {
+      var dots = D.problems.map(function (p) {
+        var a = r.ans[p.id];
+        if (a) return '<i class="' + (a.correct ? 'c' : 'w') + '" title="' + p.day + '-күн: ' + esc(a.answer) + '">' + (a.correct ? '✓' : '✗') + '</i>';
+        return '<i' + (p.date >= today ? ' class="o"' : '') + ' title="' + p.day + '-күн"></i>';
+      }).join('');
+      return '<tr class="' + (i < 10 && r.correct > 0 ? 'top10' : '') + '"><td><span class="rk">' + (i + 1) + '</span></td>' +
+        '<td class="n">' + esc(r.s.name) + (dupName(r.s) ? ' <span class="warn" title="Аты ұқсас басқа қатысушы бар — бір бала екі рет жазылған болуы мүмкін. Қажет болса «Біріктіру» басыңыз.">⚠ ұқсас</span>' : '') + '</td>' +
+        '<td>' + r.s.grade + '</td><td><b>' + r.correct + '</b> / ' + D.problems.length + '</td><td>' + r.answered + '</td>' +
+        '<td><span class="dots">' + dots + '</span></td><td class="muted">' + fmtTime(r.last) + '</td>' +
+        '<td><span class="acts"><button data-a="edit" data-i="' + i + '">Түзету</button><button data-a="merge" data-i="' + i + '">Біріктіру</button><button class="del" data-a="del" data-i="' + i + '">Өшіру</button></span></td></tr>';
+    }).join('');
+    $('#lb').innerHTML = head + (body || '<tr><td colspan="8" class="muted" style="padding:28px;text-align:center">Әзірге қатысушы жоқ</td></tr>');
+    $$('#lb [data-a]').forEach(function (b) { b.addEventListener('click', function () { act(b.dataset.a, LB[Number(b.dataset.i)]); }); });
+
+    var ph = '<tr><th>Күн</th><th>Күні</th><th>Есеп</th><th>Дұрыс жауап</th><th>Жауап берді</th><th>Дұрыс</th><th>Жауаптар (%)</th><th>Күйі</th></tr>';
+    $('#pt').innerHTML = ph + D.problems.map(function (p) {
+      var list = D.answers.filter(function (a) { return a.problem_id === p.id; });
+      var ok = list.filter(function (a) { return a.correct; }).length;
+      var st = p.date === today ? '<span class="chip gold">Бүгін</span>' : p.date < today ? '<span class="chip grey">Жабық</span>' : '<span class="chip">Алда</span>';
+      return '<tr><td><b>' + p.day + '</b></td><td>' + p.date.split('-').reverse().slice(0, 2).join('.') + '</td>' +
+        '<td style="white-space:normal;min-width:260px;max-width:520px">' + esc(p.type === 'equations' ? 'Заңдылық: 12+6=48, 24+5=49, 36+4=52, 48+3=?' : p.kk) + '</td>' +
+        '<td><b>' + p.answer + '</b></td><td>' + list.length + '</td><td>' + (list.length ? Math.round(ok * 100 / list.length) + '% (' + ok + ')' : '—') + '</td><td><div class="dchips">' + dist(p.id, 6).rows.map(function (x) { return '<span class="' + (x.ok ? 'ok' : '') + '">' + esc(x.v) + ' · ' + x.pct + '%</span>'; }).join('') + '</div></td><td>' + st + '</td></tr>';
+    }).join('');
+  }
+
+  function act(kind, r) {
+    if (!r) return;
+    var s = r.s;
+    if (kind === 'del') {
+      if (!confirm('«' + s.name + '» және оның барлық жауаптары (' + r.answered + ') өшірілсін бе? Қайтару мүмкін емес.')) return;
+      return call({ action: 'deleteStudent', id: s.id }).then(load);
+    }
+    if (kind === 'edit') {
+      var name = prompt('Аты-жөні:', s.name); if (name == null) return;
+      var grade = prompt('Сыныбы (' + D.group.grades.join(' немесе ') + '):', s.grade); if (grade == null) return;
+      return call({ action: 'updateStudent', id: s.id, name: name, grade: Number(grade) }).then(function (x) {
+        if (x.status === 409) alert('Мұндай атпен басқа қатысушы бар. Екеуін «Біріктіру» арқылы қосыңыз.');
+        else if (x.status !== 200) alert('Сақталмады: аты (аты + тегі) не сыныбы қате.');
+        load();
+      });
+    }
+    if (kind === 'merge') {
+      var n = prompt('«' + s.name + '» жазбасын қай қатысушыға қосу керек? Кестедегі орын нөмірін (#) жазыңыз.\nЖауаптары соған көшеді, ал бұл жазба өшеді.');
+      if (n == null) return;
+      var tg = LB[Number(n) - 1];
+      if (!tg || tg.s.id === s.id) return alert('Мұндай орын нөмірі жоқ.');
+      if (!confirm('«' + s.name + '» → «' + tg.s.name + '». Біріктіру керек пе?')) return;
+      return call({ action: 'merge', fromId: s.id, toId: tg.s.id }).then(load);
+    }
+  }
+
+  function csv() {
+    var head = ['Орын', 'Аты-жөні', 'Сынып', 'Дұрыс', 'Жауап берді'].concat(D.problems.map(function (p) { return p.day + '-күн'; }));
+    var lines = [head].concat(LB.map(function (r, i) {
+      return [i + 1, r.s.name, r.s.grade, r.correct, r.answered].concat(D.problems.map(function (p) { var a = r.ans[p.id]; return a ? a.answer + (a.correct ? ' ✓' : ' ✗') : ''; }));
+    }));
+    var text = '﻿' + lines.map(function (row) { return row.map(function (v) { v = String(v); return /[";\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(';'); }).join('\r\n');
+    download(new Blob([text], { type: 'text/csv;charset=utf-8' }), 'reyting-' + grpLabel() + '-synyp-' + D.today + '.csv');
+  }
+  function download(blob, name) {
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  function png() {
+    if (!window.html2canvas) return alert('Суретті жасау мүмкін болмады — скриншот жасаңыз.');
+    var b = $('#board');
+    html2canvas(b, { scale: 2, backgroundColor: null, useCORS: true }).then(function (c) {
+      c.toBlob(function (blob) { download(blob, 'reyting-' + grpLabel() + '-synyp-' + D.today + '.png'); });
+    });
+  }
+
+  $('#login').addEventListener('submit', function (ev) { ev.preventDefault(); setPw($('#pw').value); $('#err').classList.remove('show'); load(); });
+  $$('.tabs button').forEach(function (b) { b.addEventListener('click', function () { VIEW = b.dataset.v; render(); }); });
+  $('#onlyTop').addEventListener('change', renderBoard);
+  $('#showAns').addEventListener('change', renderBoard);
+  $('#showDist').addEventListener('change', renderBoard);
+  $('#distDay').addEventListener('change', renderBoard);
+  $('#refresh').addEventListener('click', load);
+  $('#logout').addEventListener('click', function () { setPw(''); showLogin(); });
+  $('#csv').addEventListener('click', csv);
+  $('#png').addEventListener('click', png);
+  if (pw()) load();
+})();
+</script>
+</body>
+</html>

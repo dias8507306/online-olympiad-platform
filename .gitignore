@@ -1,0 +1,11 @@
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
+ADMIN-PASSWORD.txt
+*.db
+*.log
+__pycache__/
+.venv/
+.DS_Store

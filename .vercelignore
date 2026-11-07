@@ -1,0 +1,8 @@
+ADMIN-PASSWORD.txt
+.env*
+tests
+scripts
+demo
+dev-server.mjs
+README.md
+deploy.sh
